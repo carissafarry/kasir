@@ -18,6 +18,7 @@ class CreateBarangsTable extends Migration
             $table->string('nama');
             $table->char('stok', 5);
             $table->char('harga');
+            $table->char('harga_beli');
             $table->string('satuan')->nullable();
             $table->timestamps();
         });

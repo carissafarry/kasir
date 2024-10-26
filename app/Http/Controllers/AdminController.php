@@ -21,6 +21,31 @@ class AdminController extends Controller
         return view('dashboard.admin.index', compact('barangKeluar', 'barangMasuk', 'transaksi', 'pengguna'));
     }
 
+    public function laporanLabaRugi(Request $request)
+    {
+        $query = DB::table('barang_keluar AS bk')
+        ->join('barang AS b', 'bk.barang_id', '=', 'b.id')
+        ->join('pesanan AS p', 'p.id', '=', 'bk.id')
+        ->select(
+            'b.nama AS NamaBarang',
+            'b.harga_beli AS HargaBeliBarang',
+            'b.harga AS HargaJualBarang',
+            DB::raw('SUM(bk.jumlah_keluar) AS TotalTerjual'),
+            DB::raw('(SUM(bk.jumlah_keluar) * b.harga_beli) AS Modal'),
+            DB::raw('(SUM(bk.jumlah_keluar) * b.harga) AS Pendapatan'),
+            DB::raw('(SUM(bk.jumlah_keluar) * b.harga) - (SUM(bk.jumlah_keluar) * b.harga_beli) AS LabaKotor')
+        )
+        ->where('p.status', 'Lunas');
+
+        // Jika ada filter tanggal
+        if ($request->has('dari') || $request->has('sampai')) {
+            $query->whereDate('p.created_at', '>=', $request->dari ? $request->dari : DB::raw('CURDATE()'))
+            ->whereDate('p.created_at', '<=', $request->sampai ? $request->sampai : DB::raw('CURDATE()'));
+        }
+        $laporanLabaRugi = $query->groupBy('b.id', 'b.nama', 'b.harga_beli', 'b.harga')->get();
+        return view('dashboard.admin.laporan.labarugi', compact('laporanLabaRugi'));
+    }
+
     public function laporanPenjualan(Request $request)
     {
         if ($request->has('dari') || $request->has('sampai')) {
@@ -42,7 +67,7 @@ class AdminController extends Controller
             return Excel::download(new \App\Exports\PenjualanExportAll(), 'laporan penjualan.xlsx');
         }
     }
-    
+
     public function exportCsvLaporanPenjualan(Request $request)
     {
         if ($request->dari || $request->sampai) {
@@ -59,6 +84,6 @@ class AdminController extends Controller
         } else {
             return Excel::download(new \App\Exports\PenjualanExportAll(), 'laporan penjualan.pdf');
         }
-        
+
     }
 }

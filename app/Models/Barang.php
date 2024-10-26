@@ -12,7 +12,7 @@ class Barang extends Model
     protected $table = 'barang';
 
     protected $fillable = [
-        'nama', 'stok', 'harga', 'satuan', 'user_id', 'kode_barang'
+        'nama', 'stok', 'harga', 'harga_beli', 'satuan', 'user_id', 'kode_barang'
     ];
 
     public function barangMasuk()

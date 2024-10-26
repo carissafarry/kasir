@@ -51,6 +51,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('laporan-penjualan/export/excel', [AdminController::class, 'exportExcelLaporanPenjualan'])->name('admin.laporan-penjualan.excel');
     Route::get('laporan-penjualan/export/csv', [AdminController::class, 'exportCsvLaporanPenjualan'])->name('admin.laporan-penjualan.csv');
 
+    Route::get('laporan-labarugi', [AdminController::class, 'laporanLabaRugi'])->name('admin.laporan-labarugi');
+
     Route::get('laporan-barang/masuk', [BarangMasukController::class, 'laporanBarangMasuk'])->name('admin.laporan-barang.masuk');
     Route::get('laporan-barang/masuk/export/pdf', [BarangMasukController::class, 'exportPDF'])->name('admin.laporan-barang.masuk.pdf');
     Route::get('laporan-barang/masuk/export/excel', [BarangMasukController::class, 'exportExcel'])->name('admin.laporan-barang.masuk.excel');
@@ -96,7 +98,7 @@ Route::group(['prefix' => 'produksi', 'middleware' => ['auth', 'produksi']], fun
     Route::get('kelola-barang/edit/{id}', [BarangController::class, 'edit'])->name('produksi.kelola-barang.edit');
     Route::post('kelola-barang/edit/{id}', [BarangController::class, 'update'])->name('produksi.kelola-barang.edit.aksi');
     Route::get('kelola-barang/hapus/{id}', [BarangController::class, 'destroy'])->name('produksi.kelola-barang.hapus');
-    
+
 });
 
 // kasir
@@ -123,5 +125,5 @@ Route::group(['prefix' => 'kasir', 'middleware' => ['auth', 'kasir']], function 
     Route::post('transaksi/bayar', [PesananController::class, 'bayar'])->name('kasir.transaksi.bayar');
     Route::get('transaksi/riwayat', [PesananController::class, 'riwayat'])->name('kasir.transaksi.riwayat');
     Route::get('transaksi/riwayat/detail/{id}', [PesananController::class, 'detail'])->name('kasir.transaksi.riwayat.detail');
-    
+
 });

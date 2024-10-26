@@ -38,4 +38,10 @@
             <span>Metode Pembayaran</span>
         </a>
     </li>
+    <li>
+        <a class="nav-link" href="{{ route('admin.laporan-labarugi') }}">
+            <i class="far fa-square"></i>
+            <span>Laporan Laba Rugi</span>
+        </a>
+    </li>
 </ul>
