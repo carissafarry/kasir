@@ -44,7 +44,7 @@ CREATE TABLE `barang` (
 -- Dumping data untuk tabel `barang`
 --
 
-INSERT INTO `barang` (`id`, `kode_barang`, `user_id`, `nama`, `stok`, `harga`, `satuan`, `created_at`, `updated_at`) VALUES
+INSERT INTO `barang` (`id`, `kode_barang`, `user_id`, `nama`, `stok`, `harga`, `harga_beli`, `satuan`, `created_at`, `updated_at`) VALUES
 (1, 'BR0001', 2, 'Spicy Chicken', '25', '18000', '17000', 'pcs', '2022-06-06 03:01:55', '2022-06-06 07:33:11'),
 (2, 'BR0002', 2, 'Chicken Katsu Isi 5', '29', '30000', '29000', 'pcs', '2022-06-06 03:01:55', '2022-06-21 02:40:57'),
 (3, 'BR0003', 2, 'Sosis Alana (Original)', '30', '15000', '14000', 'pcs', '2022-06-06 03:01:55', '2022-06-06 07:29:50'),
