@@ -21,6 +21,27 @@ class AdminController extends Controller
         return view('dashboard.admin.index', compact('barangKeluar', 'barangMasuk', 'transaksi', 'pengguna'));
     }
 
+    public function kombinasiPaketPenjualan(Request $request)
+    {
+        $barang = DB::table('barang')
+        ->select(
+            'id',
+            'nama',
+            'harga',
+            'harga_beli',
+            'stok',
+            DB::raw('(harga - harga_beli) AS KeuntunganPerUnit'),
+            DB::raw('(stok * (harga - harga_beli)) AS TotalKeuntungan')
+        )
+        ->orderBy('TotalKeuntungan', 'DESC')
+        ->get();
+
+        // Menghitung total keuntungan
+        $totalKeuntungan = $barang->sum('TotalKeuntungan');
+
+        return view('dashboard.admin.laporan.kombinasi_paket', compact('barang', 'totalKeuntungan'));
+    }
+
     public function laporanLabaRugi(Request $request)
     {
         $query = DB::table('barang_keluar AS bk')

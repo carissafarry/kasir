@@ -39,6 +39,12 @@
         </a>
     </li>
     <li>
+        <a class="nav-link" href="{{ route('admin.paket-penjualan') }}">
+            <i class="far fa-square"></i>
+            <span>Paket Penjualan</span>
+        </a>
+    </li>
+    <li>
         <a class="nav-link" href="{{ route('admin.laporan-labarugi') }}">
             <i class="far fa-square"></i>
             <span>Laporan Laba Rugi</span>

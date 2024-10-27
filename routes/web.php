@@ -51,6 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('laporan-penjualan/export/excel', [AdminController::class, 'exportExcelLaporanPenjualan'])->name('admin.laporan-penjualan.excel');
     Route::get('laporan-penjualan/export/csv', [AdminController::class, 'exportCsvLaporanPenjualan'])->name('admin.laporan-penjualan.csv');
 
+    Route::get('paket-penjualan', [AdminController::class, 'kombinasiPaketPenjualan'])->name('admin.paket-penjualan');
     Route::get('laporan-labarugi', [AdminController::class, 'laporanLabaRugi'])->name('admin.laporan-labarugi');
 
     Route::get('laporan-barang/masuk', [BarangMasukController::class, 'laporanBarangMasuk'])->name('admin.laporan-barang.masuk');
